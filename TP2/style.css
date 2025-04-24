@@ -1,0 +1,65 @@
+/* EJERCICIO 3 */
+.resaltado {
+    background-color: yellow;
+    font-weight: bold;
+}
+
+.oculto {
+    display: none;
+}
+
+/* EJERCICIO 4 */
+.completado {
+    text-decoration: line-through;
+    color: green;
+}
+
+/* EJERCICIO 5 */
+#ej5 {
+    font-family: Arial, sans-serif;
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f3f3f3;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+form label {
+    display: block;
+    margin-bottom: 15px;
+}
+
+.estiloInput {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btnEstilo {
+    width: 100%;
+    padding: 10px;
+    background-color: #077894;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btnEstilo:hover {
+    background-color: #305da1;
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 4px;
+}
