@@ -1,0 +1,115 @@
+#contacto {
+    padding: 60px 20px;
+    background-color: #f2f2f2;
+    text-align: center;
+}
+  
+#contacto h2 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: #333;
+}
+  
+.formulario-contacto {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: left;
+}
+  
+.formulario-contacto label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+  
+.formulario-contacto input,
+.formulario-contacto textarea,
+.formulario-contacto select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    width: 100%;
+}
+  
+fieldset {
+    border: none;
+    padding: 0;
+}
+  
+legend {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+  
+.formulario-contacto input[type="radio"] {
+    margin-right: 5px;
+}
+  
+.botones {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+  
+.botones button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: #0056b3;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+  
+.botones button:hover {
+    background-color: #003f88;
+}
+  
+@media (max-width: 360px) {
+    #contacto h2 {
+        font-size: 1.8em;
+    }
+
+    .botones {
+        flex-direction: column;
+    }
+
+    .botones button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    #contacto {
+        padding: 40px 15px;
+    }
+
+    #contacto h2 {
+        font-size: 2em;
+    }
+
+    .formulario-contacto {
+        max-width: 90%;
+    }
+
+    .botones {
+        flex-direction: column;
+    }
+
+    .botones button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1024px) {
+    .formulario-contacto {
+        max-width: 90%;
+    }
+
+    #contacto h2 {
+        font-size: 2.2em;
+    }
+}
