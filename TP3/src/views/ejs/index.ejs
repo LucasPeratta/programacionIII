@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bienvenida - Clínica Salud+</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: #f0f4f8;
+        margin: 0;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        color: #333;
+      }
+      h1 {
+        color: #007bff;
+        margin-bottom: 2rem;
+        text-align: center;
+        font-weight: 700;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+      }
+      nav {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 123, 255, 0.4);
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+      button:hover {
+        background-color: #0056b3;
+        transform: translateY(-3px);
+      }
+      button:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 3px rgba(0, 123, 255, 0.2);
+      }
+      @media (max-width: 480px) {
+        button {
+          width: 100%;
+          padding: 1rem;
+          font-size: 1rem;
+        }
+        nav {
+          flex-direction: column;
+          gap: 1rem;
+          width: 100%;
+          max-width: 320px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>¡Bienvenido al sistema de turnos de la clínica!</h1>
+
+    <nav>
+      <button onclick="location.href='/turnoslocal'">Ver Turnos</button>
+      <button onclick="location.href='/turnoslocal/nuevo'">
+        Registrar Nuevo Turno
+      </button>
+      <button onclick="location.href='/turnoslocal'">Cancelar Turno</button>
+    </nav>
+  </body>
+</html>

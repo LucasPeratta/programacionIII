@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LISTA DE TURNOS</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 2rem;
+        background-color: #f9f9f9;
+        color: #333;
+      }
+      h1 {
+        color: #007bff; /* azul */
+        margin-bottom: 1rem;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      th,
+      td {
+        padding: 0.75rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      th {
+        background-color: #007bff; /* azul */
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      tr:hover {
+        background-color: #cce5ff; /* azul claro para hover */
+      }
+      .btn-eliminar {
+        background-color: #007bff; /* azul */
+        color: white;
+        border: none;
+        padding: 0.4rem 0.8rem;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .btn-eliminar:hover {
+        background-color: #0056b3; /* azul más oscuro */
+      }
+      .btn-volver {
+        display: inline-block;
+        margin-top: 2rem;
+        text-decoration: none;
+        background-color: #28a745; /* verde */
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+      }
+      .btn-volver:hover {
+        background-color: #218838;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Turnos con opción de eliminar</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Paciente</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% turnos.forEach(t => { %>
+        <tr>
+          <td><%= t.id %></td>
+          <td><%= t.idPaciente %></td>
+          <td><%= t.fecha %></td>
+          <td><%= t.hora %></td>
+          <td>
+            <form
+              method="POST"
+              action="/turnoslocal/eliminar/<%= t.id %>"
+              onsubmit="return confirm('¿Querés eliminar este turno?');"
+            >
+              <button type="submit" class="btn-eliminar">Eliminar</button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <a href="/home" class="btn-volver">Volver</a>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TP2 - Ejercicio 1</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 2rem;
+      }
+      #tituloPrincipal {
+        color: darkgreen;
+      }
+      .parrafo {
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 id="tituloPrincipal">Titulo Principal</h1>
+    <p class="parrafo">Parrafo 1</p>
+    <p class="parrafo">Parrafo 2</p>
+
+    <div id="contenedor">
+      <ul>
+        <li>Lista 1</li>
+        <li>Lista 2</li>
+        <li>Lista 3</li>
+      </ul>
+    </div>
+
+    <script>
+      // Esperar a que cargue la pagina
+      window.onload = function () {
+        // Seleccionar titulo y cambiamos texto
+        const titulo = document.getElementById("tituloPrincipal");
+        titulo.textContent = "Texto modificado desde JS";
+
+        // seleccionar parrafos por clase y cambiamos color
+        const parrafos = document.getElementsByClassName("parrafo");
+        for (let i = 0; i < parrafos.length; i++) {
+          parrafos[i].style.color = "blue";
+        }
+
+        // seleccionamos los li dentro del contenedor y modificamos texto
+        const listas = document.querySelectorAll("#contenedor li");
+        listas.forEach((li) => {
+          li.textContent += " (Modificada desde JS)";
+        });
+      };
+    </script>
+  </body>
+</html>
