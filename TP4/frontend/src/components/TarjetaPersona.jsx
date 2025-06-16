@@ -1,8 +1,5 @@
 import React from 'react';
 
-// En este componente recibimos una sola persona por props desde (ListaTarjetas)
-// y mostramos sus datos en una tarjeta
-
 function TarjetaPersona({ persona }) {
   const { nombre, apellido, edad, email } = persona;
 
@@ -17,7 +14,6 @@ function TarjetaPersona({ persona }) {
   );
 }
 
-// Estilos inline simples para darle forma de tarjeta
 const estilos = {
   tarjeta: {
     border: '1px solid #ccc',
