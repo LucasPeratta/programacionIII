@@ -1,11 +1,14 @@
 const express = require("express");
 const dotenv = require("dotenv");
 
-const rutaTurnosOnline = require("./routes/turnosOnline.route.js");
-const rutaTurnosLocal = require("./routes/turnosLocal.route.js");
+const rutaTurnosOnline = require("./routes/API/turnosOnlineRoutes.js");
+const rutaTurnosLocal = require("./routes/views/turnosLocalRoutes.js");
 
-const rutaPacientes = require("./routes/pacientes.route.js");
-const home = require("./routes/home.routes.js");
+const rutaPacientesOnline = require("./routes/API/pacientesRoutes.js");
+const rutaPacienteslocal = require("./routes/views/pacientesRoutes.js");
+
+const home = require("./routes/home/homeRoutes.js");
+
 const morgan = require("morgan");
 
 dotenv.config();
@@ -25,21 +28,23 @@ class Server {
       require.resolve(template);
 
       this.app.set("view engine", template);
-      this.app.set("views", "./src/views/" + template);
+      this.app.set("views", "./src/views/" + template || "ejs");
     } catch (error) {
       console.log("Error al configurar el motor de plantillas:", template);
     }
   }
   middleware() {
     this.app.use(express.json());
-    this.app.use(express.urlencoded({ extended: true })); // para leer formularios
+    this.app.use(express.urlencoded({ extended: true }));
     this.app.use(morgan("dev"));
   }
 
   rutas() {
-    this.app.use("/api/v1/pacientes", rutaPacientes);
+    this.app.use("/api/v1/pacientes", rutaPacientesOnline);
     this.app.use("/api/v1/turnosOnline", rutaTurnosOnline);
     this.app.use("/turnoslocal", rutaTurnosLocal);
+    this.app.use("/pacientelocal", rutaPacienteslocal);
+
     this.app.use("/", home);
   }
 

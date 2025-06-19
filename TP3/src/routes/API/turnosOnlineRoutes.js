@@ -3,11 +3,11 @@ const {
   getTurnosPorPaciente,
   cancelarTurno,
   createTurno,
-} = require("../controllers/API/turnosOnline.controller");
+} = require("../../controllers/API/turnosOnlineControllers");
 
 const {
   verifyTokenMiddleware,
-} = require("../middlewares/verifyToken.middleware");
+} = require("../../middlewares/verifyToken.middleware");
 
 const rutaTurnos = Router();
 

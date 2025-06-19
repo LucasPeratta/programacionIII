@@ -1,10 +1,11 @@
 const Persona = require("./../mock/entities/paciente.entity.js");
 const Config = require("./../../config/config.js");
 const jwt = require("jsonwebtoken");
+
 class PacientesModel {
   constructor() {
-    this.data = [];
-    this.data.push(
+    this.data = [
+      //creo mas personas para probar, siempre al montarlo volveran a ser estas 4.
       new Persona(
         "123456787",
         "Sergio",
@@ -12,9 +13,34 @@ class PacientesModel {
         "email@gmail.com",
         "12345",
         1
-      )
-    );
-    this.id = 2;
+      ),
+      new Persona(
+        "234567891",
+        "María",
+        "González",
+        "maria@gmail.com",
+        "12345",
+        2
+      ),
+      new Persona(
+        "345678912",
+        "Lucas",
+        "Fernández",
+        "lucas@gmail.com",
+        "12345",
+        3
+      ),
+      new Persona(
+        "456789123",
+        "Carla",
+        "Martínez",
+        "carla@gmail.com",
+        "12345",
+        4
+      ),
+    ];
+
+    this.id = 5;
   }
 
   findByEmail(email, password) {
@@ -32,6 +58,7 @@ class PacientesModel {
       }
     });
   }
+
   validate(email, password) {
     return new Promise(async (resolve, reject) => {
       try {
@@ -101,21 +128,22 @@ class PacientesModel {
     });
   }
   // elimina el cliente con id = id
-  delete(id) {
-    new Promise((resolve, reject) => {
+  delete(dni) {
+    return new Promise((resolve, reject) => {
       try {
-        const pacienteEncontrado = this.data.find((p) => p.id == id);
+        const pacienteEncontrado = this.data.find((p) => p.dni == dni);
         if (!pacienteEncontrado) {
-          throw new Error("el id no es válido");
+          throw new Error("El paciente no existe");
         }
         const pos = this.data.indexOf(pacienteEncontrado);
         this.data.splice(pos, 1);
-        resolve(pacienteEncontrado); // elimina el elemento de la posición pos del arreglo
+        resolve(pacienteEncontrado);
       } catch (error) {
         reject(error);
       }
     });
   }
+
   // devuelve la lista completa en un arreglo de strings
   list() {
     return new Promise((resolve, reject) => {
