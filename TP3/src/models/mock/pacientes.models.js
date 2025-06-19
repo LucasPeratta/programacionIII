@@ -127,7 +127,6 @@ class PacientesModel {
       }
     });
   }
-  // elimina el cliente con id = id
   delete(dni) {
     return new Promise((resolve, reject) => {
       try {
