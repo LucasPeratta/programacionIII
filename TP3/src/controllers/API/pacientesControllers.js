@@ -17,6 +17,7 @@ class PacientesController {
   async list(req, res) {
     res.status(200).json(await pacientesModel.list());
   }
+
   async create(req, res) {
     const { dni, nombre, apellido, email } = req.body;
 
