@@ -1,28 +1,38 @@
 const Turno = require("../../models/API/Turno");
 
-const getTurnosPorPaciente = (req, res) => {
-  const { idPaciente } = req.params;
-  const turnos = Turno.getByPacienteId(idPaciente);
+const getTurnosPorPaciente = async (req, res) => {
+  try {
+    const { idPaciente } = req.params;
+    const turnos = await Turno.getByPacienteId(idPaciente);
 
-  if (turnos.length === 0) {
-    return res.status(404).json({ message: "Turno no encontrado" });
+    if (!turnos.length) {
+      return res.status(404).json({ message: "Turno no encontrado" });
+    }
+
+    res.json(turnos);
+  } catch (error) {
+    console.error("Error al obtener turnos:", error);
+    res.status(500).json({ error: "Error al obtener turnos" });
   }
-
-  res.json(turnos);
 };
 
-const cancelarTurno = (req, res) => {
-  const { idTurno } = req.params;
-  const turnoEliminado = Turno.deleteById(idTurno);
+const cancelarTurno = async (req, res) => {
+  try {
+    const { idTurno } = req.params;
+    const turnoEliminado = await Turno.deleteById(idTurno);
 
-  if (!turnoEliminado) {
-    return res.status(404).json({ error: "Turno no encontrado" });
+    if (!turnoEliminado) {
+      return res.status(404).json({ error: "Turno no encontrado" });
+    }
+
+    res.json({ mensaje: "Turno cancelado correctamente" });
+  } catch (error) {
+    console.error("Error al cancelar turno:", error);
+    res.status(500).json({ error: "Error al cancelar turno" });
   }
-
-  res.json({ mensaje: "Turno cancelado correctamente" });
 };
 
-const createTurno = (req, res) => {
+const createTurno = async (req, res) => {
   try {
     const { fecha, hora } = req.body;
     const { userId: idPaciente } = req.user;
@@ -31,7 +41,7 @@ const createTurno = (req, res) => {
       return res.status(400).json({ error: "Faltan datos: fecha u hora" });
     }
 
-    const nuevoTurno = Turno.createTurno(idPaciente, fecha, hora);
+    const nuevoTurno = await Turno.createTurno(idPaciente, fecha, hora);
     res.status(201).json({ mensaje: "Turno creado", turno: nuevoTurno });
   } catch (error) {
     console.error("Error al crear el turno:", error);

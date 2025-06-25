@@ -3,10 +3,6 @@ const path = require("path");
 
 const dbPath = path.join(__dirname, "../../data/views/turnosLocal.json");
 
-const readDB = () => JSON.parse(fs.readFileSync(dbPath));
-const writeDB = (data) =>
-  fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
-
 class TurnoLocal {
   constructor(id, idPaciente, fecha, hora) {
     this.id = id;
@@ -15,26 +11,61 @@ class TurnoLocal {
     this.hora = hora;
   }
 
+  static readDB() {
+    return new Promise((resolve, reject) => {
+      fs.readFile(dbPath, "utf-8", (err, data) => {
+        if (err) return reject(err);
+        try {
+          const parsed = JSON.parse(data);
+          resolve(parsed);
+        } catch (e) {
+          reject(e);
+        }
+      });
+    });
+  }
+
+  static writeDB(data) {
+    return new Promise((resolve, reject) => {
+      fs.writeFile(dbPath, JSON.stringify(data, null, 2), (err) => {
+        if (err) return reject(err);
+        resolve();
+      });
+    });
+  }
+
   static getAll() {
-    return readDB();
+    return this.readDB();
   }
 
   static create(idPaciente, fecha, hora) {
-    const data = readDB();
-    const nuevoId = `t${data.length + 1}`;
-    const nuevoTurno = new TurnoLocal(nuevoId, idPaciente, fecha, hora);
-    data.push(nuevoTurno);
-    writeDB(data);
-    return nuevoTurno;
+    return new Promise((resolve, reject) => {
+      this.readDB()
+        .then((data) => {
+          const nuevoId = `t${data.length + 1}`;
+          const nuevoTurno = new TurnoLocal(nuevoId, idPaciente, fecha, hora);
+          data.push(nuevoTurno);
+          this.writeDB(data)
+            .then(() => resolve(nuevoTurno))
+            .catch(reject);
+        })
+        .catch(reject);
+    });
   }
 
   static deleteById(idTurno) {
-    const data = readDB();
-    const index = data.findIndex((t) => t.id === idTurno);
-    if (index === -1) return false;
-    data.splice(index, 1);
-    writeDB(data);
-    return true;
+    return new Promise((resolve, reject) => {
+      this.readDB()
+        .then((data) => {
+          const index = data.findIndex((t) => t.id === idTurno);
+          if (index === -1) return resolve(false);
+          data.splice(index, 1);
+          this.writeDB(data)
+            .then(() => resolve(true))
+            .catch(reject);
+        })
+        .catch(reject);
+    });
   }
 }
 
